@@ -14,4 +14,5 @@ public abstract class GameState {
 	public void update(){}
 	public void draw(Graphics2D g){}
 	public void handleListener(){}
+	int tutu = 2;
 }
