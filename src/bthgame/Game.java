@@ -10,5 +10,7 @@ public class Game{
 		int b = q;
 		
 		String h = "bonjour";
+		int s = q + b;
+		
 	}
 }
