@@ -12,5 +12,6 @@ public class Game{
 		String h = "bonjour";
 		int s = q + b;
 		
+		double x = 90;
 	}
 }
