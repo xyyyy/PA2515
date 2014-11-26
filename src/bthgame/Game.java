@@ -12,7 +12,11 @@ public class Game{
 		String h = "bonjour";
 		int s = q + b;
 		
+
 		String y = "Hej";
-		
+		int r = 3;
+
+		double x = 90;
+
 	}
 }
