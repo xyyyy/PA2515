@@ -8,5 +8,7 @@ public class Game{
 		
 		int q = 8;
 		int b = q;
+		
+		String h = "bonjour";
 	}
 }
