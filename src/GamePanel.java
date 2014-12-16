@@ -19,9 +19,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
 	private TileMap tileMap;
 	private Player player;
-	
-	public GamePanel() {
+	private Menu menu;
+	public GamePanel(Menu menu) {
 		super();
+		this.menu = menu;
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setFocusable(true);
 		requestFocus();
