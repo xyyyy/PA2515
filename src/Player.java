@@ -1,12 +1,10 @@
 import java.awt.*;
 import java.awt.image.*;
-<<<<<<< HEAD
 
 import javax.imageio.ImageIO;
 
-=======
-import javax.imageio.ImageIO;
->>>>>>> bfa34e54e0c021e1f3f47e0d18251493031ad6ce
+
+
 import java.io.File;
 
 public class Player {
@@ -45,7 +43,7 @@ public class Player {
 	private BufferedImage[] fallingSprites;
 	private boolean facingLeft;
 	
-	public Player(TileMap tm) {
+	public Player(TileMap tm, int skin) {
 		
 		tileMap = tm;
 		
@@ -80,6 +78,20 @@ public class Player {
 				);
 			}
 			
+			/*idleSprites[0] = ImageIO.read(new File("graphics/characters/ch0" + skin + "-stand.png"));
+			jumpingSprites[0] = ImageIO.read(new File("graphics/characters/ch0" + skin + "-jump.png"));
+			fallingSprites[0] = ImageIO.read(new File("graphics/characters/ch0" + skin + "-jump.png"));
+			
+			BufferedImage image = ImageIO.read(new File("graphics/characters/ch0" + skin + "-walkanimation.png"));
+			for(int i = 0; i < walkingSprites.length; i++) {
+				walkingSprites[i] = image.getSubimage(
+					i * width,
+					0,
+					width,
+					height
+				);
+			}*/
+			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -92,7 +104,6 @@ public class Player {
 	
 	public void setx(int i) { x = i; }
 	public void sety(int i) { y = i; }
-<<<<<<< HEAD
 	public double getx() { return x; }
 	public double gety() { return y; }
 	public double getWidth() { return width; }
@@ -101,11 +112,7 @@ public class Player {
 	public void setLeft(boolean b) { left = b; }
 	public void setRight(boolean b) { right = b; }
 	public void setFalling(boolean b) { falling = b; }
-=======
-	
-	public void setLeft(boolean b) { left = b; }
-	public void setRight(boolean b) { right = b; }
->>>>>>> bfa34e54e0c021e1f3f47e0d18251493031ad6ce
+
 	public void setJumping(boolean b) {
 		if(!falling) {
 			jumping = true;
@@ -127,13 +134,10 @@ public class Player {
 	
 	public void update() {
 		
-<<<<<<< HEAD
 
 		//System.out.println("Player X : " + x);
 		//System.out.println("Player Y : " + y);
-		
-=======
->>>>>>> bfa34e54e0c021e1f3f47e0d18251493031ad6ce
+
 		// determine next position
 		if(left) {
 			dx -= moveSpeed;
@@ -282,6 +286,8 @@ public class Player {
 				animation.getImage(),
 				(int) (tx + x - width / 2),
 				(int) (ty + y - height / 2),
+				width,
+				height,
 				null
 			);
 		}

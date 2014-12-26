@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -9,12 +8,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
-=======
-import javax.swing.JPanel;
-import java.awt.*;
-import java.awt.image.*;
-import java.awt.event.*;
->>>>>>> bfa34e54e0c021e1f3f47e0d18251493031ad6ce
 
 public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
@@ -32,13 +25,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
 	private TileMap tileMap;
 	private Player player;
-<<<<<<< HEAD
 	
 	private ArrayList<Ennemi> ennemis;
 	private ArrayList<Item> items;
 	
-=======
->>>>>>> bfa34e54e0c021e1f3f47e0d18251493031ad6ce
 	private Menu menu;
 	public GamePanel(Menu menu) {
 		super();
@@ -93,26 +83,22 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		g = (Graphics2D) image.getGraphics();
 		
-<<<<<<< HEAD
 
 		JukeBox.init();
 		JukeBox.load("level1.wav", "level1");
 		JukeBox.load("getitem.wav", "item");
 		JukeBox.load("killennemi.wav", "killennemi");
 		JukeBox.load("badtouch.wav", "badtouch");
-		//JukeBox.setVolume("level1", -40f);
+		JukeBox.setVolume("level1", -40f);
 		JukeBox.play("badtouch");
 		
-=======
->>>>>>> bfa34e54e0c021e1f3f47e0d18251493031ad6ce
 		tileMap = new TileMap("testmap2.txt", 32);
 		tileMap.loadTiles("graphics/tileset.gif");
 		
-		player = new Player(tileMap);
+		player = new Player(tileMap, 1);
 		player.setx(50);
 		player.sety(50);
 		
-<<<<<<< HEAD
 		ennemis = new ArrayList<Ennemi>();
 		items = new ArrayList<Item>();
 		
@@ -141,8 +127,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		items.get(3).setx(500);
 		items.get(3).sety(150);
 		
-=======
->>>>>>> bfa34e54e0c021e1f3f47e0d18251493031ad6ce
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////
@@ -152,7 +136,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		tileMap.update();
 		player.update();
 		
-<<<<<<< HEAD
 
 		//                          COLLISION WITH THE ENNEMIES
 		
@@ -256,8 +239,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		}
 		
 		
-=======
->>>>>>> bfa34e54e0c021e1f3f47e0d18251493031ad6ce
 	}
 	
 	private void render() {
@@ -267,7 +248,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
 		tileMap.draw(g);
 		player.draw(g);
-<<<<<<< HEAD
 
 		for(Ennemi en : ennemis){
 			en.draw(g);
@@ -279,8 +259,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			it.draw(g);
 		}
 		
-=======
->>>>>>> bfa34e54e0c021e1f3f47e0d18251493031ad6ce
 		
 	}
 	
