@@ -65,12 +65,20 @@ public class Menu extends javax.swing.JFrame {
     	//gp.addNotify();
 		this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
 		this.setContentPane(gp);
+<<<<<<< HEAD
 		this.setResizable(false);
 		this.pack();
 		this.revalidate();
 		this.setState(Frame.ICONIFIED);
 		this.setState(Frame.NORMAL);
 		this.setVisible(true);
+=======
+		this.pack();
+		this.revalidate();
+		this.setVisible(true);
+		this.setState(Frame.ICONIFIED);
+		this.setState(Frame.NORMAL);
+>>>>>>> bfa34e54e0c021e1f3f47e0d18251493031ad6ce
 		
         /*if(this.game == null){
             game = new GamePanel();

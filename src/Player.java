@@ -1,8 +1,12 @@
 import java.awt.*;
 import java.awt.image.*;
+<<<<<<< HEAD
 
 import javax.imageio.ImageIO;
 
+=======
+import javax.imageio.ImageIO;
+>>>>>>> bfa34e54e0c021e1f3f47e0d18251493031ad6ce
 import java.io.File;
 
 public class Player {
@@ -88,6 +92,7 @@ public class Player {
 	
 	public void setx(int i) { x = i; }
 	public void sety(int i) { y = i; }
+<<<<<<< HEAD
 	public double getx() { return x; }
 	public double gety() { return y; }
 	public double getWidth() { return width; }
@@ -96,6 +101,11 @@ public class Player {
 	public void setLeft(boolean b) { left = b; }
 	public void setRight(boolean b) { right = b; }
 	public void setFalling(boolean b) { falling = b; }
+=======
+	
+	public void setLeft(boolean b) { left = b; }
+	public void setRight(boolean b) { right = b; }
+>>>>>>> bfa34e54e0c021e1f3f47e0d18251493031ad6ce
 	public void setJumping(boolean b) {
 		if(!falling) {
 			jumping = true;
@@ -117,10 +127,13 @@ public class Player {
 	
 	public void update() {
 		
+<<<<<<< HEAD
 
 		//System.out.println("Player X : " + x);
 		//System.out.println("Player Y : " + y);
 		
+=======
+>>>>>>> bfa34e54e0c021e1f3f47e0d18251493031ad6ce
 		// determine next position
 		if(left) {
 			dx -= moveSpeed;
