@@ -95,7 +95,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		tileMap = new TileMap("testmap2.txt", 32);
 		tileMap.loadTiles("graphics/tileset.gif");
 		
-		player = new Player(tileMap, 1);
+		player = new Player(tileMap, 2);
 		player.setx(50);
 		player.sety(50);
 		
@@ -104,7 +104,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
 		
 		// ADD ENNEMIES
-		for(int j = 0 ; j < 3 ; j++){
+		for(int j = 0 ; j < 10 ; j++){
 			ennemis.add(new Ennemi(tileMap));
 		}
 		ennemis.get(0).setx(50);
@@ -113,6 +113,20 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		ennemis.get(1).sety(50);
 		ennemis.get(2).setx(300);
 		ennemis.get(2).sety(50);
+		ennemis.get(3).setx(250);
+		ennemis.get(3).sety(50);
+		ennemis.get(4).setx(500);
+		ennemis.get(4).sety(50);
+		ennemis.get(5).setx(300);
+		ennemis.get(5).sety(80);
+		ennemis.get(6).setx(120);
+		ennemis.get(6).sety(150);
+		ennemis.get(7).setx(600);
+		ennemis.get(7).sety(50);
+		ennemis.get(8).setx(300);
+		ennemis.get(8).sety(300);
+		ennemis.get(9).setx(900);
+		ennemis.get(9).sety(50);
 		
 		// ADD ITEMS
 		for(int j = 0 ; j < 4 ; j++){
@@ -142,47 +156,61 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		for(Ennemi en : ennemis){
 			en.update();
 		
-		//TOP / BOTTOM
-			if ((player.getx() >= en.getx() &&
-				player.getx() <= en.getx() + en.getWidth())
+			
+			// PLAYER IS ON LEFT
+			if (player.getx() < en.getx() + en.getWidth() &&
+				player.getx() + player.getWidth() <= en.getx() && 
+				player.gety() < en.gety() + en.getHeight() &&
+				player.gety() + player.getHeight() > en.gety()){
 				
-				||
-				
-				(player.getx() + player.getWidth() >= en.getx() &&
-				player.getx() + player.getWidth() <= en.getx() + en.getWidth())){
-				
-				//TOP
-				if (player.gety() + player.getHeight() >= en.gety() - 6 &&
-				    player.gety() + player.getHeight() <= en.gety() + 6){
-					player.setFalling(false);
-					player.setJumping(true);
-					en.stop();
-					JukeBox.play("killennemi");
-					//ennemis.remove(en);
-					//break;
-				}
-				
+				en.setPosition(1);
 			}
 			
-		//LEFT / RIGHT
-			if ((player.gety() >= en.gety() &&
-					player.gety() <= en.gety() + en.getHeight())
-					
-				||
+			//PLAYER IS ON TOP
+			if (player.getx() < en.getx() + en.getWidth() &&
+				player.getx() + player.getWidth() > en.getx() && 
+				player.gety() < en.gety() + en.getHeight() &&
+				player.gety() + player.getHeight() <= en.gety()){
 				
-				(player.gety() + player.getHeight() >= en.gety() &&
-				player.gety() + player.getHeight() <= en.gety() + en.getHeight())){
-				
-				//LEFT + RIGHT
-				if ((player.getx() + player.getWidth() >= en.getx() - 2.1 &&
-				    player.getx() + player.getWidth() <= en.getx() + 2.1) ||
-				    (player.getx() >= en.getx() + en.getWidth() - 2.1 &&
-				    player.getx() <= en.getx() + en.getWidth() + 2.1)){
-					
-					System.out.println("die");
-				}
-					
+				en.setPosition(2);
 			}
+			
+			//PLAYER IS ON RIGHT
+			if (player.getx() >= en.getx() + en.getWidth() &&
+				player.getx() + player.getWidth() > en.getx() && 
+				player.gety() < en.gety() + en.getHeight() &&
+				player.gety() + player.getHeight() > en.gety()){
+				
+				en.setPosition(3);
+			}
+			
+			
+			// COLLISION  
+			if (player.getx() < en.getx() + en.getWidth() &&
+				player.getx() + player.getWidth() > en.getx() && 
+				player.gety() < en.gety() + en.getHeight() &&
+				player.gety() + player.getHeight() > en.gety()){
+					
+					
+					if (en.getPosition() == 1){
+						System.out.println("gauche");
+					}
+					
+					if (en.getPosition() == 3){
+						System.out.println("droite");
+					}
+					
+					if(en.getPosition()  == 2){
+						player.setFalling(false);
+						player.setJumping(true);
+						JukeBox.play("killennemi");
+						ennemis.remove(en);
+						break;
+					}
+						
+				}
+						
+			
 			
 		}
 		
@@ -192,52 +220,19 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		for(Item it : items){
 			it.update();
 		
-		//TOP / BOTTOM
-			if ((player.getx() >= it.getx() &&
-				player.getx() <= it.getx() + it.getWidth())
+			if (player.getx() < it.getx() + it.getWidth() &&
+				player.getx() + player.getWidth() > it.getx() &&
+				player.gety() < it.gety() + it.getHeight() &&
+				player.gety() + player.getHeight() > it.gety()
+				){
 				
-				||
-				
-				(player.getx() + player.getWidth() >= it.getx() &&
-				player.getx() + player.getWidth() <= it.getx() + it.getWidth())){
-				
-				//TOP + BOTTOM
-				if ((player.gety() + player.getHeight() >= it.gety() - 6 &&
-				    player.gety() + player.getHeight() <= it.gety() + 6) ||
-				    (player.gety() >= it.gety() + it.getHeight() - 6 &&
-				    player.gety() <= it.gety() + it.getHeight() + 6)){
 
 					JukeBox.play("item");
 					items.remove(it);
 					break;
-				}
-				
 			}
-			
-		//LEFT / RIGHT
-			if ((player.gety() >= it.gety() &&
-					player.gety() <= it.gety() + it.getHeight())
-					
-				||
-				
-				(player.gety() + player.getHeight() >= it.gety() &&
-				player.gety() + player.getHeight() <= it.gety() + it.getHeight())){
-				
-				//LEFT + RIGHT
-				if ((player.getx() + player.getWidth() >= it.getx() - 2.1 &&
-				    player.getx() + player.getWidth() <= it.getx() + 2.1) ||
-				    (player.getx() >= it.getx() + it.getWidth() - 2.1 &&
-				    player.getx() <= it.getx() + it.getWidth() + 2.1)){
-
-					JukeBox.play("item");
-					items.remove(it);
-					break;
-				}
-					
-			}
-			
 		}
-		
+			
 		
 	}
 	

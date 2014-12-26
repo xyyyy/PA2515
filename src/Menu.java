@@ -65,7 +65,6 @@ public class Menu extends javax.swing.JFrame {
     	//gp.addNotify();
 		this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
 		this.setContentPane(gp);
-		this.setResizable(false);
 		this.pack();
 		this.revalidate();
 		this.setState(Frame.ICONIFIED);

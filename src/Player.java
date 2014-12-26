@@ -48,7 +48,7 @@ public class Player {
 		tileMap = tm;
 		
 		width = 22;
-		height = 22;
+		height = 36;
 		
 		moveSpeed = 0.6;
 		maxSpeed = 4.2;
@@ -62,9 +62,9 @@ public class Player {
 			idleSprites = new BufferedImage[1];
 			jumpingSprites = new BufferedImage[1];
 			fallingSprites = new BufferedImage[1];
-			walkingSprites = new BufferedImage[6];
+			walkingSprites = new BufferedImage[2];
 			
-			idleSprites[0] = ImageIO.read(new File("graphics/player/kirbyidle.gif"));
+			/*idleSprites[0] = ImageIO.read(new File("graphics/player/kirbyidle.gif"));
 			jumpingSprites[0] = ImageIO.read(new File("graphics/player/kirbyjump.gif"));
 			fallingSprites[0] = ImageIO.read(new File("graphics/player/kirbyfall.gif"));
 			
@@ -76,9 +76,9 @@ public class Player {
 					width,
 					height
 				);
-			}
+			}*/
 			
-			/*idleSprites[0] = ImageIO.read(new File("graphics/characters/ch0" + skin + "-stand.png"));
+			idleSprites[0] = ImageIO.read(new File("graphics/characters/ch0" + skin + "-stand.png"));
 			jumpingSprites[0] = ImageIO.read(new File("graphics/characters/ch0" + skin + "-jump.png"));
 			fallingSprites[0] = ImageIO.read(new File("graphics/characters/ch0" + skin + "-jump.png"));
 			
@@ -90,7 +90,7 @@ public class Player {
 					width,
 					height
 				);
-			}*/
+			}
 			
 		}
 		catch(Exception e) {
@@ -102,8 +102,8 @@ public class Player {
 		
 	}
 	
-	public void setx(int i) { x = i; }
-	public void sety(int i) { y = i; }
+	public void setx(double i) { x = i; }
+	public void sety(double i) { y = i; }
 	public double getx() { return x; }
 	public double gety() { return y; }
 	public double getWidth() { return width; }

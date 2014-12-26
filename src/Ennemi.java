@@ -24,6 +24,7 @@ public class Ennemi {
 	private double stopSpeed;
 	private double jumpStart;
 	private double gravity;
+	private int position;
 	
 	private TileMap tileMap;
 	
@@ -84,10 +85,12 @@ public class Ennemi {
 		
 	}
 	
-	public void setx(int i) { x = i; }
-	public void sety(int i) { y = i; }
+	public void setx(double i) { x = i; }
+	public void sety(double i) { y = i; }
+	public void setPosition(int i){ position = i; }
 	public double getx() { return x; }
 	public double gety() { return y; }
+	public int getPosition() { return position; }
 	public double getWidth() { return width; }
 	public double getHeight() { return height; }
 	
@@ -111,8 +114,7 @@ public class Ennemi {
 	}
 	
 	public void stop(){
-		left = false;
-		right = false;
+		left = right = false;
 	}
 	
 	/////////////////////////////////////////////////////////////////////
