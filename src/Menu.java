@@ -60,6 +60,8 @@ public class Menu extends javax.swing.JFrame {
       
     }
     
+    
+    
     public void goToGame(){
     	GamePanel gp = new GamePanel(this);
     	//gp.addNotify();
