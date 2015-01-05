@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 
 public class Lifes {
 	
-	int amount = 3;
+	private int amount = 3;
 	
 	public boolean kill(){
 		if(--amount <= 0){

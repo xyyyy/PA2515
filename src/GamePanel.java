@@ -32,6 +32,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	private Menu menu;
 	
 	private Lifes lifes;
+	
+	private Score score;
+	
 	public GamePanel(Menu menu) {
 		super();
 		this.menu = menu;
@@ -103,7 +106,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
 		
 		lifes = new Lifes();
-				
+		
+		score = new Score();
+		
 		ennemis = new ArrayList<Ennemi>();
 		items = new ArrayList<Item>();
 		
@@ -209,6 +214,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 						player.setFalling(false);
 						player.setJumping(true);
 						JukeBox.play("killennemi");
+						score.enemyKileed();
 						ennemis.remove(en);
 						break;
 					}
@@ -231,7 +237,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 				player.gety() + player.getHeight() > it.gety()
 				){
 				
-
+					score.itemCollected();
 					JukeBox.play("item");
 					items.remove(it);
 					break;
@@ -249,7 +255,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		tileMap.draw(g);
 		player.draw(g);
 		lifes.draw(g);
-		
+		score.draw(g);
 		for(Ennemi en : ennemis){
 			en.draw(g);
 		}
