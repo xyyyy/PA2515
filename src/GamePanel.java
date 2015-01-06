@@ -30,6 +30,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	private ArrayList<Item> items;
 	
 	private Menu menu;
+	
+	private Lifes lifes;
+	
+	private Score score;
+	
 	public GamePanel(Menu menu) {
 		super();
 		this.menu = menu;
@@ -98,6 +103,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		player = new Player(tileMap, 2);
 		player.setx(50);
 		player.sety(50);
+		
+		
+		lifes = new Lifes();
+		
+		score = new Score();
 		
 		ennemis = new ArrayList<Ennemi>();
 		items = new ArrayList<Item>();
@@ -192,18 +202,19 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 				player.gety() + player.getHeight() > en.gety()){
 					
 					
-					if (en.getPosition() == 1){
-						System.out.println("gauche");
+					if (en.getPosition() == 1 || en.getPosition() == 3){
+						this.ennemis.remove(en);
+						if(this.lifes.kill()){
+							this.menu.goToMenu();
+						}
+						System.out.println("killed");
+						break;
 					}
-					
-					if (en.getPosition() == 3){
-						System.out.println("droite");
-					}
-					
-					if(en.getPosition()  == 2){
+					else if(en.getPosition()  == 2){
 						player.setFalling(false);
 						player.setJumping(true);
 						JukeBox.play("killennemi");
+						score.enemyKileed();
 						ennemis.remove(en);
 						break;
 					}
@@ -226,7 +237,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 				player.gety() + player.getHeight() > it.gety()
 				){
 				
-
+					score.itemCollected();
 					JukeBox.play("item");
 					items.remove(it);
 					break;
@@ -243,7 +254,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
 		tileMap.draw(g);
 		player.draw(g);
-
+		lifes.draw(g);
+		score.draw(g);
 		for(Ennemi en : ennemis){
 			en.draw(g);
 		}

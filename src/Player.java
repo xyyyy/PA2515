@@ -5,7 +5,9 @@ import javax.imageio.ImageIO;
 
 
 
+
 import java.io.File;
+import java.util.ArrayList;
 
 public class Player {
 	
@@ -43,6 +45,8 @@ public class Player {
 	private BufferedImage[] fallingSprites;
 	private boolean facingLeft;
 	
+	private int lifes = 3;
+	private ArrayList<Ennemi> ennemis;
 	public Player(TileMap tm, int skin) {
 		
 		tileMap = tm;
@@ -274,6 +278,14 @@ public class Player {
 			facingLeft = false;
 		}
 		
+	}
+	
+	//return trues if the player is killed
+	public boolean removeLife(){
+		if(--this.lifes == 0){
+			return true;
+		}
+		return false;
 	}
 	
 	public void draw(Graphics2D g) {
