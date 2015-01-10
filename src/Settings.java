@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -64,6 +66,55 @@ public class Settings extends javax.swing.JPanel {
 		this.tileMap.loadTiles("graphics/" + this.tileSet);
     }
 
+    public ArrayList getItems(){
+    	
+		ArrayList<Item> items = new ArrayList<Item>();
+		// ADD ITEMS
+				for(int j = 0 ; j < 4 ; j++){
+					items.add(new Item(this, tileMap));
+				}
+				items.get(0).setx(80);
+				items.get(0).sety(80);
+				items.get(1).setx(210);
+				items.get(1).sety(170);
+				items.get(2).setx(300);
+				items.get(2).sety(330);
+				items.get(3).setx(500);
+				items.get(3).sety(150);
+		return items;
+    }
+    
+    public ArrayList getEnemies(){
+    	
+    	ArrayList<Ennemi> ennemis = new ArrayList<Ennemi>();
+		
+		// ADD ENNEMIES
+		for(int j = 0 ; j < 10 ; j++){
+			ennemis.add(new Ennemi(tileMap));
+		}
+		ennemis.get(0).setx(50);
+		ennemis.get(0).sety(50);
+		ennemis.get(1).setx(200);
+		ennemis.get(1).sety(50);
+		ennemis.get(2).setx(300);
+		ennemis.get(2).sety(50);
+		ennemis.get(3).setx(250);
+		ennemis.get(3).sety(50);
+		ennemis.get(4).setx(500);
+		ennemis.get(4).sety(50);
+		ennemis.get(5).setx(300);
+		ennemis.get(5).sety(80);
+		ennemis.get(6).setx(120);
+		ennemis.get(6).sety(150);
+		ennemis.get(7).setx(600);
+		ennemis.get(7).sety(50);
+		ennemis.get(8).setx(300);
+		ennemis.get(8).sety(300);
+		ennemis.get(9).setx(900);
+		ennemis.get(9).sety(50);
+		
+		return ennemis;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
