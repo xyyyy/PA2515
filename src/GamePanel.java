@@ -6,6 +6,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.JPanel;
 
@@ -36,7 +38,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	private Score score;
 	
 	private Settings settings;
-	
+	private long startTime; 
+	private long remainingTime;
 	public GamePanel(Menu menu) {
 		super();
 		this.menu = menu;
@@ -44,6 +47,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setFocusable(true);
 		requestFocus();
+		
+		this.startTime  = new Date().getTime()/1000;
+		this.remainingTime = this.settings.getTime();
+		//Thread t = new Thread(new Time(this.settings, this.menu, this.thread));
+		//t.start();
+		
 	}
 	
 	public void addNotify() {
@@ -64,7 +73,17 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		long waitTime;
 		
 		while(running) {
+			//check time
 			
+			this.remainingTime = this.settings.getTime()+ this.startTime - new Date().getTime()/1000;
+			System.out.println("mt"+this.settings.getTime());
+			System.out.println("st" +this.startTime);
+			System.out.println("d"+new Date().getTime()/1000);
+			System.out.println("rt"+remainingTime);
+			if(this.remainingTime<=0){
+				menu.goToMenu();
+				System.out.println("end time");
+			}
 			startTime = System.nanoTime();
 			
 			update();
@@ -140,7 +159,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
 		// ADD ITEMS
 		for(int j = 0 ; j < 4 ; j++){
-			items.add(new Item("vodka", tileMap));
+			items.add(new Item(this.settings, tileMap));
 		}
 		items.get(0).setx(80);
 		items.get(0).sety(80);
@@ -156,6 +175,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	//////////////////////////////////////////////////////////////////////////////
 	
 	private void update() {
+		
 		
 		tileMap.update();
 		player.update();
@@ -265,7 +285,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		for(Item it : items){
 			it.draw(g);
 		}
+		g.setColor(Color.GREEN);
 		
+		String tmp = String.valueOf(this.remainingTime/60) + ":" + String.valueOf(this.remainingTime%60);
+		g.drawString(tmp, 100, 20);
 		
 	}
 	
