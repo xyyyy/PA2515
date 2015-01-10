@@ -35,9 +35,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
 	private Score score;
 	
+	private Settings settings;
+	
 	public GamePanel(Menu menu) {
 		super();
 		this.menu = menu;
+		this.settings = this.menu.getSettings();
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setFocusable(true);
 		requestFocus();
@@ -97,12 +100,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		JukeBox.setVolume("level1", -40f);
 		JukeBox.play("badtouch");
 		
-		tileMap = new TileMap("testmap2.txt", 32);
-		tileMap.loadTiles("graphics/tileset.gif");
+		tileMap = this.settings.getTileMap();
+		player = this.settings.getPlayer();
 		
-		player = new Player(tileMap, 2);
-		player.setx(50);
-		player.sety(50);
 		
 		
 		lifes = new Lifes();

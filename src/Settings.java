@@ -17,16 +17,38 @@ public class Settings extends javax.swing.JPanel {
      */
     private final Menu start;
     
+    private int characterSkin = 4;//1-4 dependsnds on gender and behaviour
+    
     private int volume = 50; //0-100
+    
+    private TileMap tileMap; 
+    
+    private int time = 60;
+    
+    public int getTime(){
+    	return this.time;
+    }
     
   //  private Player player = new Nerd();
     
-    
-    
+    public TileMap getTileMap(){
+    	
+		return this.tileMap;
+		
+    	
+    }
+    public Player getPlayer(){
+    	Player player = new Player(tileMap, this.characterSkin);
+		player.setx(50);
+		player.sety(50);
+    	return player;
+    }
     
     public Settings(Menu start) {
         initComponents();
         this.start = start;
+        this.tileMap = new TileMap("testmap2.txt", 32);
+		this.tileMap.loadTiles("graphics/tileset.gif");
     }
 
     /**
