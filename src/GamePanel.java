@@ -126,7 +126,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
 		lifes = new Lifes();
 		
-		score = new Score();
+		score = new Score(this.settings);
 		
 		ennemis = this.settings.getEnemies();
 		items = this.settings.getItems();
