@@ -19,7 +19,7 @@ public class Item {
 		
 		this.tileMap = tm;
 		
-		width = 15;
+		width = 20;
 		height = 30;
 		
 		try {

@@ -31,7 +31,7 @@ public class Settings extends javax.swing.JPanel {
     
    private TileMap tileMap; 
     
-    private String item = "vodka.png";
+    private String item = "book.png";
     
     private int time = 90;//set Time in seconds
     public Settings(Menu start) {
@@ -39,12 +39,21 @@ public class Settings extends javax.swing.JPanel {
         groupButtons();
         this.start = start;
         this.map1.doClick();
+        this.girl.doClick();
+        this.nerd.doClick();
         this.mapChanged();
         
     }
     private void mapChanged(){
     	this.tileMap = new TileMap("map" + this.map + ".txt", 32); 
 		this.tileMap.loadTiles("graphics/" + this.tileSet); 
+    }
+    
+    public String getBack(){
+    	if(this.characterSkin < 3){
+    		return "back2.jpg";
+    	}
+    	return "back.jpg";
     }
     
     public int getTime(){
@@ -514,6 +523,7 @@ public class Settings extends javax.swing.JPanel {
         else{//if girl
             this.characterSkin = 4;
         }
+        this.item = "bottle.png";
     }                                           
 
     private void nerdActionPerformed(java.awt.event.ActionEvent evt) {                                     
@@ -523,6 +533,7 @@ public class Settings extends javax.swing.JPanel {
         else{//if girl
             this.characterSkin = 2;
         }
+        this.item = "book.png";
     }                                    
 
     private void volumeSliderStateChanged(javax.swing.event.ChangeEvent evt) {                                          

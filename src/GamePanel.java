@@ -111,7 +111,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		
 		try{
-			background = ImageIO.read(new File("graphics/back2.jpg"));
+			background = ImageIO.read(new File("graphics/" + this.settings.getBack()));
 		}
 		catch(Exception e) {
 			e.printStackTrace();
