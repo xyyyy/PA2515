@@ -575,7 +575,12 @@ public class Settings extends javax.swing.JPanel {
         bgMode = new ButtonGroup();
         bgMode.add(nerd);
         bgMode.add(partyAnimal);
+        bgGender = new ButtonGroup();
+        bgGender.add(boy);
+        bgGender.add(girl);
     }
+    
+    private ButtonGroup bgGender;
     private javax.swing.ButtonGroup bgMode;
     private javax.swing.ButtonGroup bgMap;
     // Variables declaration - do not modify                     
