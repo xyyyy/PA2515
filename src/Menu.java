@@ -8,6 +8,9 @@
 
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 
 import javax.swing.JPanel;
 
@@ -43,6 +46,10 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
        
         initComponents();
+       URL url =  ClassLoader.getSystemResource("graphics/icon.jpg");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image img = kit.createImage(url);
+        setIconImage(img);
         setSize(WIDTH, HEIGHT);
         float volume = -40;
         JukeBox.init();
