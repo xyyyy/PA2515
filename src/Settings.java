@@ -420,7 +420,7 @@ public class Settings extends javax.swing.JPanel {
         });
         
 
-        jButton1.setText("Return");
+        jButton1.setText("Play");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -579,7 +579,7 @@ public class Settings extends javax.swing.JPanel {
     
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                    
-        this.start.goToMenu();
+        this.start.goToGame();
     }  
     
 

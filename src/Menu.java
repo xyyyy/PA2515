@@ -97,7 +97,7 @@ public class Menu extends javax.swing.JFrame {
     }
     
     public void goToMenu(){
-        this.changePanel(menu);
+        this.goToSettings();
         }
 
     public void goToSettings(){
