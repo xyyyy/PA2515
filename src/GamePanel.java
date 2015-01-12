@@ -80,13 +80,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			//check time
 			
 			this.remainingTime = this.settings.getTime()+ this.startTime - new Date().getTime()/1000;
-			System.out.println("mt"+this.settings.getTime());
-			System.out.println("st" +this.startTime);
-			System.out.println("d"+new Date().getTime()/1000);
-			System.out.println("rt"+remainingTime);
+		
 			if(this.remainingTime<=0){
 				menu.goToMenu();
-				System.out.println("end time");
+			
 			}
 			startTime = System.nanoTime();
 			
