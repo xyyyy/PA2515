@@ -1,3 +1,7 @@
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /*
@@ -13,7 +17,15 @@ import java.util.ArrayList;
 
 
 
+
+
+
+
+
+
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
+import javax.swing.JRadioButton;
 
 /**
  *
@@ -25,7 +37,8 @@ public class Settings extends javax.swing.JPanel {
      * Creates new form Settings
      */
         private final Menu start;
-    
+    	public static final int WIDTH = 700;
+    	public static final int HEIGHT = 500;
     private int characterSkin = 4;//1-4 dependnds on gender and behaviour
     
     private int volume = 50; //0-100
@@ -39,20 +52,55 @@ public class Settings extends javax.swing.JPanel {
     private String item = "book.png";
     
     private int time = 900;//set Time in seconds
+    
+    private BufferedImage backgroundImage;
+    private BufferedImage logoImage;
+    private ArrayList<BufferedImage> characterImages;
+    
+
+    
     public Settings(Menu start) {
         initComponents();
         groupButtons();
+        
         this.start = start;
         this.map1.doClick();
         this.girl.doClick();
         this.nerd.doClick();
+        this.easy.doClick();
         this.mapChanged();
-        
+        this.characterImages = new ArrayList<BufferedImage>();
+        this.setSize(WIDTH, HEIGHT + 300);
+        this.loadPictures();
+        repaint();
     }
+    
+    private void loadPictures(){
+    	 
+
+
+         try {                
+            this.backgroundImage = ImageIO.read(new File("graphics/menu_back.png"));
+            this.logoImage = ImageIO.read(new File("graphics/logo.png"));//graphics/logo.png"));
+            for(int i = 1; i < 5; i++){
+            	this.characterImages.add(ImageIO.read(new File("graphics/characters/ch0"+  i+".png")));
+            }
+         } catch (IOException ex) {
+         }
+    }
+    
     private void mapChanged(){
     	this.tileMap = new TileMap("map" + this.map + ".txt", 32); 
 		this.tileMap.loadTiles("graphics/" + this.tileSet); 
+		if(this.easy.isSelected()){
+			this.easy.doClick();
+		}else if(this.medium.isSelected()){
+			this.medium.doClick();
+		}else if(this.hard.isSelected()){
+			this.hard.doClick();
+		}
     }
+    
     
     public String getBack(){
     	if(this.characterSkin < 3){
@@ -354,7 +402,13 @@ public class Settings extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        easy = new javax.swing.JRadioButton();
+        medium = new javax.swing.JRadioButton();
+        hard = new javax.swing.JRadioButton();
 
+        setMinimumSize(new java.awt.Dimension(700, 500));
+
+        map1.setForeground(new java.awt.Color(255, 255, 255));
         map1.setText("Map 1");
         map1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -362,6 +416,7 @@ public class Settings extends javax.swing.JPanel {
             }
         });
 
+        map2.setForeground(new java.awt.Color(255, 255, 255));
         map2.setText("Map2");
         map2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -369,6 +424,7 @@ public class Settings extends javax.swing.JPanel {
             }
         });
 
+        map3.setForeground(new java.awt.Color(255, 255, 255));
         map3.setText("Map3");
         map3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -376,6 +432,8 @@ public class Settings extends javax.swing.JPanel {
             }
         });
 
+        map4.setBackground(new java.awt.Color(255, 255, 255));
+        map4.setForeground(new java.awt.Color(255, 255, 255));
         map4.setText("Map4");
         map4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -383,6 +441,7 @@ public class Settings extends javax.swing.JPanel {
             }
         });
 
+        nerd.setForeground(new java.awt.Color(255, 255, 255));
         nerd.setText("Nerd");
         nerd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -390,6 +449,7 @@ public class Settings extends javax.swing.JPanel {
             }
         });
 
+        partyAnimal.setForeground(new java.awt.Color(255, 255, 255));
         partyAnimal.setText("Party Animal");
         partyAnimal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -403,8 +463,10 @@ public class Settings extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Volume");
 
+        boy.setForeground(new java.awt.Color(255, 255, 255));
         boy.setText("Boy");
         boy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -412,24 +474,50 @@ public class Settings extends javax.swing.JPanel {
             }
         });
 
+        girl.setForeground(new java.awt.Color(255, 255, 255));
         girl.setText("Girl");
         girl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 girlActionPerformed(evt);
             }
         });
-        
 
         jButton1.setText("Play");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+            	jButton1ActionPerformed(evt);
+            }
+        });
+        
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Gender");
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Character");
+
+        easy.setForeground(new java.awt.Color(255, 255, 255));
+        easy.setText("Easy");
+        easy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                easyActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Gender");
+        medium.setForeground(new java.awt.Color(255, 255, 255));
+        medium.setText("Medium");
+        medium.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mediumActionPerformed(evt);
+            }
+        });
 
-        jLabel3.setText("Character");
+        hard.setForeground(new java.awt.Color(255, 255, 255));
+        hard.setText("Hard");
+        hard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hardActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -439,70 +527,93 @@ public class Settings extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(map1)
-                                .addGap(18, 18, 18)
-                                .addComponent(map2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(girl)
-                                    .addComponent(nerd))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(easy))
+                        .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(map3)
-                                .addGap(18, 18, 18)
-                                .addComponent(map4))
+                                .addComponent(nerd)
+                                .addGap(22, 22, 22)
+                                .addComponent(partyAnimal))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(medium)
+                                    .addComponent(girl))
+                                .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(boy)
-                                    .addComponent(partyAnimal))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                        .addComponent(volumeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(hard))))
+                        .addGap(40, 449, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(map1)
+                            .addComponent(map3))
                         .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(map4)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(map2)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
-                        .addGap(40, 40, 40))))
+                        .addGap(18, 18, 18))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(volumeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(158, 158, 158)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(nerd)
                     .addComponent(partyAnimal))
-                .addGap(18, 18, 18)
+                .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(girl)
                     .addComponent(boy))
-                .addGap(8, 8, 8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(easy)
+                    .addComponent(medium)
+                    .addComponent(hard))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(map1)
-                    .addComponent(map2)
+                    .addComponent(map2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(map3)
                     .addComponent(map4))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 276, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(volumeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addComponent(jLabel1))
-                    .addComponent(volumeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(40, 40, 40))))
         );
-    }// </editor-fold>                        
+    }// </editor-fold>                                              
 
+    private void changeTextColours(){
+    	
+    }
+    
     private void map2ActionPerformed(java.awt.event.ActionEvent evt) {                                     
         this.map = 2;
+        
         this.mapChanged();
     }                                    
 
@@ -531,6 +642,7 @@ public class Settings extends javax.swing.JPanel {
             this.characterSkin = 4;
         }
         this.item = "bottle.png";
+        repaint();
     }                                           
 
     private void nerdActionPerformed(java.awt.event.ActionEvent evt) {   
@@ -543,6 +655,7 @@ public class Settings extends javax.swing.JPanel {
             this.characterSkin = 2;
         }
         this.item = "book.png";
+        repaint();
     }                                    
 
     private void volumeSliderStateChanged(javax.swing.event.ChangeEvent evt) {                                          
@@ -566,6 +679,7 @@ public class Settings extends javax.swing.JPanel {
         else{//if party animal
             this.characterSkin = 4;
         }
+        repaint();
     }                                    
 
     private void boyActionPerformed(java.awt.event.ActionEvent evt) {                                    
@@ -575,12 +689,51 @@ public class Settings extends javax.swing.JPanel {
         else{//if party animal
             this.characterSkin = 3;
         }
+        repaint();
     }        
     
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                    
         this.start.goToGame();
     }  
+    private void easyActionPerformed(java.awt.event.ActionEvent evt) {                                     
+        switch(this.map){
+        	case 1: this.time = 120;
+        			break;
+        	case 2: this.time = 120;
+					break;
+        	case 3: this.time = 140;
+					break;
+        	case 4: this.time = 130;
+					break;
+        }
+    }                                    
+
+    private void mediumActionPerformed(java.awt.event.ActionEvent evt) {                                       
+    	switch(this.map){
+	    	case 1: this.time = 90;
+	    			break;
+	    	case 2: this.time = 90;
+					break;
+	    	case 3: this.time = 100;
+					break;
+	    	case 4: this.time = 105;
+					break;
+	    }
+    }                                      
+
+    private void hardActionPerformed(java.awt.event.ActionEvent evt) {                                     
+    	switch(this.map){
+	    	case 1: this.time = 65;
+	    			break;
+	    	case 2: this.time = 65;
+					break;
+	    	case 3: this.time = 75;
+					break;
+	    	case 4: this.time = 60;
+					break;
+	    }
+    }   
     
 
     private  void groupButtons(){
@@ -595,8 +748,25 @@ public class Settings extends javax.swing.JPanel {
         bgGender = new ButtonGroup();
         bgGender.add(boy);
         bgGender.add(girl);
+        bgDifficulty = new ButtonGroup();
+        bgDifficulty.add(easy);
+        bgDifficulty.add(medium);
+        bgDifficulty.add(hard);
     }
     
+   
+    
+
+
+    protected void paintComponent(Graphics g) {
+    	
+        super.paintComponent(g);
+        g.drawImage(this.backgroundImage, 0, 0,WIDTH, HEIGHT, null); // see javadoc for more info on the parameters
+        g.drawImage(this.logoImage, WIDTH/2 - 577/6, 30,577/3, 132/3, null);
+        g.drawImage(this.characterImages.get(this.characterSkin - 1), WIDTH/2 - 70, 110, 130, HEIGHT - 150, null);
+    }
+    
+    private ButtonGroup bgDifficulty;
     private ButtonGroup bgGender;
     private javax.swing.ButtonGroup bgMode;
     private javax.swing.ButtonGroup bgMap;
@@ -614,5 +784,8 @@ public class Settings extends javax.swing.JPanel {
     private javax.swing.JRadioButton nerd;
     private javax.swing.JRadioButton partyAnimal;
     private javax.swing.JSlider volumeSlider;
+    private javax.swing.JRadioButton easy;
+    private javax.swing.JRadioButton medium;
+    private javax.swing.JRadioButton hard;
     // End of variables declaration                   
 }

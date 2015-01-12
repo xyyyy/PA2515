@@ -43,7 +43,7 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
        
         initComponents();
-        setSize(new Dimension(WIDTH, HEIGHT));
+        setSize(WIDTH, HEIGHT);
         float volume = -40;
         JukeBox.init();
 		JukeBox.load("level1.wav", "level1");

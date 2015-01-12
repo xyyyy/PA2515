@@ -194,7 +194,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 						if(this.lifes.kill()){
 							this.menu.goToMenu();
 						}
-						
+						//JukeBox.play("badtouch");-> here should be played the killed sound
 						System.out.println("killed");
 						break;
 					}
