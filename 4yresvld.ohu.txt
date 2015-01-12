@@ -1,0 +1,49 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	deleted:    bin/badtouch.wav
+#	deleted:    bin/getitem.wav
+#	deleted:    bin/killennemi.wav
+#	deleted:    bin/level1.wav
+#
+# Changes not staged for commit:
+#	modified:   Menu/build/classes/javaapplication2/Menu.class
+#	deleted:    bin/bthgame/Game.class
+#	deleted:    bin/javaapplication1/Menu.class
+#	deleted:    bin/javaapplication1/MouseInput.class
+#	deleted:    bin/javaapplication2/Game$1.class
+#	deleted:    bin/javaapplication2/Game.class
+#	deleted:    bin/javaapplication2/Game.form
+#	deleted:    bin/javaapplication2/MainMenu$1.class
+#	deleted:    bin/javaapplication2/MainMenu$2.class
+#	deleted:    bin/javaapplication2/MainMenu$3.class
+#	deleted:    bin/javaapplication2/MainMenu$4.class
+#	deleted:    bin/javaapplication2/MainMenu$5.class
+#	deleted:    bin/javaapplication2/MainMenu$6.class
+#	deleted:    bin/javaapplication2/MainMenu.class
+#	deleted:    bin/javaapplication2/MainMenu.form
+#	deleted:    bin/javaapplication2/Menu$1.class
+#	deleted:    bin/javaapplication2/Menu.class
+#	deleted:    bin/javaapplication2/Menu.form
+#	deleted:    bin/javaapplication2/Nerd.class
+#	deleted:    bin/javaapplication2/PartyAnimal.class
+#	deleted:    bin/javaapplication2/Player.class
+#	deleted:    bin/javaapplication2/Saver$1.class
+#	deleted:    bin/javaapplication2/Saver.class
+#	deleted:    bin/javaapplication2/Saver.form
+#	deleted:    bin/javaapplication2/Settings$1.class
+#	deleted:    bin/javaapplication2/Settings.class
+#	deleted:    bin/javaapplication2/Settings.form
+#	modified:   src/GamePanel.java
+#
+# Untracked files:
+#	Map_2.txt
+#	bin/.gitignore
+#	bin/level1.wav
+#	src/GamePanel2.java
+#
+

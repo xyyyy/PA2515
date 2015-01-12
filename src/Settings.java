@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,18 +19,291 @@ public class Settings extends javax.swing.JPanel {
      */
     private final Menu start;
     
+    private int characterSkin = 4;//1-4 dependnds on gender and behaviour
+    
     private int volume = 50; //0-100
     
+    private int map = 4; //"Map_2.txt";
+    
+    private String tileSet = "tileset.gif";
+    
+    private TileMap tileMap; 
+    
+    private String item = "vodka.png";
+    
+    private int time = 90;//set Time in seconds
+    
+    public int getTime(){
+    	return this.time;
+    }
+    
+   
+ 
+	public String getItem(){
+    	return this.item;
+    }
   //  private Player player = new Nerd();
     
     
     
+    public TileMap getTileMap(){
+    	
+		return this.tileMap;
+		
+    	
+    }
+    public Player getPlayer(){
+    	Player player = new Player(tileMap, this.characterSkin);
+		player.setx(50);
+		player.sety(50);
+    	return player;
+    }
     
     public Settings(Menu start) {
         initComponents();
         this.start = start;
+        this.tileMap = new TileMap("map" + this.map + ".txt", 32);
+		this.tileMap.loadTiles("graphics/" + this.tileSet);
     }
 
+    public ArrayList getItems(){
+    	
+		ArrayList<Item> items = new ArrayList<Item>();
+		// ADD ITEMS
+		
+		switch(this.map){
+			case 1:	for(int j = 0 ; j < 6 ; j++){
+						items.add(new Item(this, tileMap));
+					}
+					items.get(0).setx(180);
+					items.get(0).sety(250);
+					items.get(1).setx(370);
+					items.get(1).sety(130);
+					items.get(2).setx(960);
+					items.get(2).sety(80);
+					items.get(3).setx(750);
+					items.get(3).sety(180);
+					items.get(4).setx(1700);
+					items.get(4).sety(255);
+					items.get(5).setx(1655);
+					items.get(5).sety(50);
+					break;
+			case 2: for(int j = 0 ; j < 4 ; j++){
+						items.add(new Item(this, tileMap));
+					}
+					items.get(0).setx(80);
+					items.get(0).sety(80);
+					items.get(1).setx(210);
+					items.get(1).sety(170);
+					items.get(2).setx(300);
+					items.get(2).sety(330);
+					items.get(3).setx(500);
+					items.get(3).sety(150);
+					break;
+			case 3: for(int j = 0 ; j < 7 ; j++){
+						items.add(new Item(this, tileMap));
+					}
+					items.get(0).setx(335);
+					items.get(0).sety(400);
+					items.get(1).setx(780);
+					items.get(1).sety(220);
+					items.get(2).setx(900);
+					items.get(2).sety(130);
+					items.get(3).setx(1170);
+					items.get(3).sety(210);
+					items.get(4).setx(1290);
+					items.get(4).sety(210);
+					items.get(5).setx(1710);
+					items.get(5).sety(50);
+					items.get(6).setx(1870);
+					items.get(6).sety(80);
+					break;
+			case 4: // ADD ITEMS
+					for(int j = 0 ; j < 4 ; j++){
+						items.add(new Item(this, tileMap));
+					}
+					items.get(0).setx(190);
+					items.get(0).sety(140);
+					items.get(1).setx(460);
+					items.get(1).sety(100);
+					items.get(2).setx(1230);
+					items.get(2).sety(350);
+					items.get(3).setx(1640);
+					items.get(3).sety(170);
+					break;
+		}
+		return items;
+    }
+    
+    public ArrayList getEnemies(){
+    	
+    	ArrayList<Ennemi> ennemis = new ArrayList<Ennemi>();
+		
+		// ADD ENNEMIES
+    	switch(this.map){
+    		case 1:	for(int j = 0 ; j < 11 ; j++){
+		    			ennemis.add(new Ennemi(tileMap));
+		    		}
+		    		ennemis.get(0).setx(100);
+		    		ennemis.get(0).sety(500);
+		    		ennemis.get(1).setx(250);
+		    		ennemis.get(1).sety(500);
+		    		ennemis.get(2).setx(300);
+		    		ennemis.get(2).sety(500);
+		    		ennemis.get(3).setx(625);
+		    		ennemis.get(3).sety(100);
+		    		ennemis.get(4).setx(725);
+		    		ennemis.get(4).sety(500);
+		    		ennemis.get(5).setx(1000);
+		    		ennemis.get(5).sety(500);
+		    		ennemis.get(6).setx(1200);
+		    		ennemis.get(6).sety(500);
+		    		ennemis.get(7).setx(1700);
+		    		ennemis.get(7).sety(500);
+		    		ennemis.get(8).setx(1750);
+		    		ennemis.get(8).sety(100);
+		    		ennemis.get(9).setx(1750);
+		    		ennemis.get(9).sety(500); 
+		    		ennemis.get(10).setx(750);
+		    		ennemis.get(10).sety(200); 
+    			
+    				break;
+    		case 2: for(int j = 0 ; j < 10 ; j++){
+						ennemis.add(new Ennemi(tileMap));
+					}
+					ennemis.get(0).setx(50);
+					ennemis.get(0).sety(50);
+					ennemis.get(1).setx(200);
+					ennemis.get(1).sety(50);
+					ennemis.get(2).setx(300);
+					ennemis.get(2).sety(50);
+					ennemis.get(3).setx(250);
+					ennemis.get(3).sety(50);
+					ennemis.get(4).setx(500);
+					ennemis.get(4).sety(50);
+					ennemis.get(5).setx(300);
+					ennemis.get(5).sety(80);
+					ennemis.get(6).setx(120);
+					ennemis.get(6).sety(150);
+					ennemis.get(7).setx(600);
+					ennemis.get(7).sety(50);
+					ennemis.get(8).setx(300);
+					ennemis.get(8).sety(300);
+					ennemis.get(9).setx(900);
+					ennemis.get(9).sety(50);
+					break;
+	    		case 3: for(int j = 0 ; j < 25 ; j++){
+		    			ennemis.add(new Ennemi(tileMap));
+		    		}
+		    		ennemis.get(0).setx(200);
+		    		ennemis.get(0).sety(500);
+		    		ennemis.get(1).setx(250);
+		    		ennemis.get(1).sety(500);
+		    		ennemis.get(2).setx(300);
+		    		ennemis.get(2).sety(500);
+		    		ennemis.get(3).setx(350);
+		    		ennemis.get(3).sety(500);
+		    		ennemis.get(4).setx(400);
+		    		ennemis.get(4).sety(500);
+		    		ennemis.get(5).setx(450);
+		    		ennemis.get(5).sety(500);
+		    		ennemis.get(6).setx(500);
+		    		ennemis.get(6).sety(500);
+		    		ennemis.get(7).setx(600);
+		    		ennemis.get(7).sety(500);
+		    		ennemis.get(8).setx(600);
+		    		ennemis.get(8).sety(500);
+		    		ennemis.get(9).setx(650);
+		    		ennemis.get(9).sety(500);
+		    		ennemis.get(10).setx(700);
+		    		ennemis.get(10).sety(500);
+		    		ennemis.get(11).setx(750);
+		    		ennemis.get(11).sety(500);
+		    		ennemis.get(12).setx(800);
+		    		ennemis.get(12).sety(500);
+		    		ennemis.get(13).setx(950); // Enemie before "above "BTH""
+		    		ennemis.get(13).sety(350); 
+		    		ennemis.get(14).setx(1000);// Enemies above "BTH"
+		    		ennemis.get(14).sety(220);
+		    		ennemis.get(15).setx(1070); 
+		    		ennemis.get(15).sety(250);
+		    		ennemis.get(16).setx(1150); 
+		    		ennemis.get(16).sety(250);
+		    		ennemis.get(17).setx(1200);
+		    		ennemis.get(17).sety(250);
+		    		ennemis.get(18).setx(1220);
+		    		ennemis.get(18).sety(250);
+		    		ennemis.get(19).setx(1280);
+		    		ennemis.get(19).sety(250);
+		    		ennemis.get(20).setx(1670); //Enemies furthest away  to the right. 
+		    		ennemis.get(20).sety(500);
+		    		ennemis.get(21).setx(1700);
+		    		ennemis.get(21).sety(500);
+		    		ennemis.get(22).setx(1720);
+		    		ennemis.get(22).sety(500);
+		    		ennemis.get(23).setx(1770);
+		    		ennemis.get(23).sety(500);
+		    		ennemis.get(24).setx(1800);
+		    		ennemis.get(24).sety(500);
+		    		break;
+	    		case 4:
+	    			for(int j = 0 ; j < 25 ; j++){
+	    				ennemis.add(new Ennemi(tileMap));
+	    			}
+	    			ennemis.get(0).setx(200);
+	    			ennemis.get(0).sety(500);
+	    			ennemis.get(1).setx(250);
+	    			ennemis.get(1).sety(500);
+	    			ennemis.get(2).setx(300);
+	    			ennemis.get(2).sety(500);
+	    			ennemis.get(3).setx(350);
+	    			ennemis.get(3).sety(500);
+	    			ennemis.get(4).setx(400);
+	    			ennemis.get(4).sety(500);
+	    			ennemis.get(5).setx(450);
+	    			ennemis.get(5).sety(500);
+	    			ennemis.get(6).setx(500);
+	    			ennemis.get(6).sety(500);
+	    			ennemis.get(7).setx(550);
+	    			ennemis.get(7).sety(500);
+	    			ennemis.get(8).setx(600);
+	    			ennemis.get(8).sety(500);
+	    			ennemis.get(9).setx(650);
+	    			ennemis.get(9).sety(500);
+	    			ennemis.get(10).setx(700);
+	    			ennemis.get(10).sety(500);
+	    			ennemis.get(11).setx(750);
+	    			ennemis.get(11).sety(500);
+	    			ennemis.get(12).setx(800);
+	    			ennemis.get(12).sety(500);
+	    			ennemis.get(13).setx(850);
+	    			ennemis.get(13).sety(500);
+	    			ennemis.get(14).setx(900);
+	    			ennemis.get(14).sety(500);
+	    			ennemis.get(15).setx(950);
+	    			ennemis.get(15).sety(500);
+	    			ennemis.get(16).setx(1000);
+	    			ennemis.get(16).sety(500);
+	    			ennemis.get(17).setx(1400);
+	    			ennemis.get(17).sety(500);
+	    			ennemis.get(18).setx(1450);
+	    			ennemis.get(18).sety(500);
+	    			ennemis.get(19).setx(1500);
+	    			ennemis.get(19).sety(500);
+	    			ennemis.get(20).setx(1550);
+	    			ennemis.get(20).sety(500);
+	    			ennemis.get(21).setx(1600);
+	    			ennemis.get(21).sety(500);
+	    			ennemis.get(22).setx(1650);
+	    			ennemis.get(22).sety(500);
+	    			ennemis.get(23).setx(1700);
+	    			ennemis.get(23).sety(500);
+	    			ennemis.get(24).setx(1750);
+	    			ennemis.get(24).sety(500);
+	    			break;
+    	}
+		return ennemis;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

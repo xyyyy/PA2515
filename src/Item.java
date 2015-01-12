@@ -15,7 +15,7 @@ public class Item {
 	private BufferedImage[] sprite;
 	private TileMap tileMap;
 	
-	public Item(String itemName, TileMap tm) {
+	public Item(Settings settings, TileMap tm) {
 		
 		this.tileMap = tm;
 		
@@ -25,7 +25,7 @@ public class Item {
 		try {
 			
 			sprite = new BufferedImage[1];
-			sprite[0] = ImageIO.read(new File("graphics/items/" + itemName + ".png"));
+			sprite[0] = ImageIO.read(new File("graphics/items/" + settings.getItem()));
 			
 		}
 		catch(Exception e) {

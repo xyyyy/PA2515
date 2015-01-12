@@ -2,11 +2,15 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener {
@@ -25,17 +29,33 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
 	private TileMap tileMap;
 	private Player player;
+	private Image background;
 	
 	private ArrayList<Ennemi> ennemis;
 	private ArrayList<Item> items;
 	
 	private Menu menu;
+	
+	private Lifes lifes;
+	
+	private Score score;
+	
+	private Settings settings;
+	private long startTime; 
+	private long remainingTime;
 	public GamePanel(Menu menu) {
 		super();
 		this.menu = menu;
+		this.settings = this.menu.getSettings();
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setFocusable(true);
 		requestFocus();
+		
+		this.startTime  = new Date().getTime()/1000;
+		this.remainingTime = this.settings.getTime();
+		//Thread t = new Thread(new Time(this.settings, this.menu, this.thread));
+		//t.start();
+		
 	}
 	
 	public void addNotify() {
@@ -56,7 +76,17 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		long waitTime;
 		
 		while(running) {
+			//check time
 			
+			this.remainingTime = this.settings.getTime()+ this.startTime - new Date().getTime()/1000;
+			System.out.println("mt"+this.settings.getTime());
+			System.out.println("st" +this.startTime);
+			System.out.println("d"+new Date().getTime()/1000);
+			System.out.println("rt"+remainingTime);
+			if(this.remainingTime<=0){
+				menu.goToMenu();
+				System.out.println("end time");
+			}
 			startTime = System.nanoTime();
 			
 			update();
@@ -81,6 +111,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		running = true;
 		
 		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+		
+		try{
+			background = ImageIO.read(new File("graphics/back2.jpg"));
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		g = (Graphics2D) image.getGraphics();
 		
 
@@ -92,60 +130,28 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		JukeBox.setVolume("level1", -40f);
 		JukeBox.play("badtouch");
 		
-		tileMap = new TileMap("testmap2.txt", 32);
-		tileMap.loadTiles("graphics/tileset.gif");
-		
-		player = new Player(tileMap, 2);
-		player.setx(50);
-		player.sety(50);
-		
-		ennemis = new ArrayList<Ennemi>();
-		items = new ArrayList<Item>();
+		tileMap = this.settings.getTileMap();
+		player = this.settings.getPlayer();
 		
 		
-		// ADD ENNEMIES
-		for(int j = 0 ; j < 10 ; j++){
-			ennemis.add(new Ennemi(tileMap));
-		}
-		ennemis.get(0).setx(50);
-		ennemis.get(0).sety(50);
-		ennemis.get(1).setx(200);
-		ennemis.get(1).sety(50);
-		ennemis.get(2).setx(300);
-		ennemis.get(2).sety(50);
-		ennemis.get(3).setx(250);
-		ennemis.get(3).sety(50);
-		ennemis.get(4).setx(500);
-		ennemis.get(4).sety(50);
-		ennemis.get(5).setx(300);
-		ennemis.get(5).sety(80);
-		ennemis.get(6).setx(120);
-		ennemis.get(6).sety(150);
-		ennemis.get(7).setx(600);
-		ennemis.get(7).sety(50);
-		ennemis.get(8).setx(300);
-		ennemis.get(8).sety(300);
-		ennemis.get(9).setx(900);
-		ennemis.get(9).sety(50);
 		
-		// ADD ITEMS
-		for(int j = 0 ; j < 4 ; j++){
-			items.add(new Item("vodka", tileMap));
-		}
-		items.get(0).setx(80);
-		items.get(0).sety(80);
-		items.get(1).setx(210);
-		items.get(1).sety(170);
-		items.get(2).setx(300);
-		items.get(2).sety(330);
-		items.get(3).setx(500);
-		items.get(3).sety(150);
+		lifes = new Lifes();
+		
+		score = new Score(this.settings);
+		
+		ennemis = this.settings.getEnemies();
+		items = this.settings.getItems();
+		
+		
+		
+		
 		
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////
 	
 	private void update() {
+		
 		
 		tileMap.update();
 		player.update();
@@ -192,18 +198,19 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 				player.gety() + player.getHeight() > en.gety()){
 					
 					
-					if (en.getPosition() == 1){
-						System.out.println("gauche");
+					if (en.getPosition() == 1 || en.getPosition() == 3){
+						this.ennemis.remove(en);
+						if(this.lifes.kill()){
+							this.menu.goToMenu();
+						}
+						System.out.println("killed");
+						break;
 					}
-					
-					if (en.getPosition() == 3){
-						System.out.println("droite");
-					}
-					
-					if(en.getPosition()  == 2){
+					else if(en.getPosition()  == 2){
 						player.setFalling(false);
 						player.setJumping(true);
 						JukeBox.play("killennemi");
+						score.enemyKileed();
 						ennemis.remove(en);
 						break;
 					}
@@ -226,7 +233,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 				player.gety() + player.getHeight() > it.gety()
 				){
 				
-
+					score.itemCollected();
 					JukeBox.play("item");
 					items.remove(it);
 					break;
@@ -240,10 +247,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
+		g.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
 		
 		tileMap.draw(g);
 		player.draw(g);
-
+		lifes.draw(g);
+		score.draw(g);
 		for(Ennemi en : ennemis){
 			en.draw(g);
 		}
@@ -253,7 +262,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		for(Item it : items){
 			it.draw(g);
 		}
+		g.setColor(Color.GREEN);
 		
+		String tmp = String.valueOf(this.remainingTime/60) + ":" + String.valueOf(this.remainingTime%60);
+		g.drawString(tmp, 100, 20);
 		
 	}
 	

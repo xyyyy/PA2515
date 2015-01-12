@@ -36,6 +36,10 @@ public class Menu extends javax.swing.JFrame {
         return game;
     }
     
+    public Settings getSettings(){
+    	return this.settings;
+    }
+    
     public Menu() {
        
         initComponents();
@@ -59,6 +63,8 @@ public class Menu extends javax.swing.JFrame {
         game = null;
       
     }
+    
+    
     
     public void goToGame(){
     	GamePanel gp = new GamePanel(this);
