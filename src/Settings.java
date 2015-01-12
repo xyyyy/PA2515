@@ -8,6 +8,11 @@ import java.util.ArrayList;
 
 
 
+
+
+
+
+
 import javax.swing.ButtonGroup;
 
 /**
@@ -516,7 +521,9 @@ public class Settings extends javax.swing.JPanel {
         this.mapChanged();
     }                                    
 
-    private void partyAnimalActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    private void partyAnimalActionPerformed(java.awt.event.ActionEvent evt) {
+    	JukeBox.play("badtouch");
+    	JukeBox.stop("level1");
         if(this.characterSkin == 1 || this.characterSkin == 3){//if boy
             this.characterSkin = 3;
         }
@@ -526,7 +533,9 @@ public class Settings extends javax.swing.JPanel {
         this.item = "bottle.png";
     }                                           
 
-    private void nerdActionPerformed(java.awt.event.ActionEvent evt) {                                     
+    private void nerdActionPerformed(java.awt.event.ActionEvent evt) {   
+    	JukeBox.play("level1");
+    	JukeBox.stop("badtouch");
         if(this.characterSkin == 1 || this.characterSkin == 3){//if boy
             this.characterSkin = 1;
         }
@@ -538,7 +547,15 @@ public class Settings extends javax.swing.JPanel {
 
     private void volumeSliderStateChanged(javax.swing.event.ChangeEvent evt) {                                          
         // TODO add your handling code here:
-        int value =this.volumeSlider.getValue();
+        float volume =this.volumeSlider.getValue();
+        volume = volume*4/5 - 80;
+       
+    	JukeBox.setVolume("level1", volume);
+		JukeBox.setVolume("item", volume);
+		JukeBox.setVolume("killennemi", volume);
+		JukeBox.setVolume("badtouch", volume);
+        
+        
         
     }                                         
 

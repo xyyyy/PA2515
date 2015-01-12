@@ -120,13 +120,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		g = (Graphics2D) image.getGraphics();
 		
 
-		JukeBox.init();
-		JukeBox.load("level1.wav", "level1");
-		JukeBox.load("getitem.wav", "item");
-		JukeBox.load("killennemi.wav", "killennemi");
-		JukeBox.load("badtouch.wav", "badtouch");
-		JukeBox.setVolume("level1", -40f);
-		JukeBox.play("badtouch");
 		
 		tileMap = this.settings.getTileMap();
 		player = this.settings.getPlayer();
@@ -201,6 +194,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 						if(this.lifes.kill()){
 							this.menu.goToMenu();
 						}
+						
 						System.out.println("killed");
 						break;
 					}

@@ -28,7 +28,7 @@ public class Menu extends javax.swing.JFrame {
     public MainMenu getMenu() {
         return menu;
     }
-    private final Settings settings = new Settings(this);
+    private final Settings settings;
     private final Saver saver = new Saver(this);
     private  GamePanel game = null;
 
@@ -44,6 +44,18 @@ public class Menu extends javax.swing.JFrame {
        
         initComponents();
         setSize(new Dimension(WIDTH, HEIGHT));
+        float volume = -40;
+        JukeBox.init();
+		JukeBox.load("level1.wav", "level1");
+		JukeBox.load("getitem.wav", "item");
+		JukeBox.load("killennemi.wav", "killennemi");
+		JukeBox.load("badtouch.wav", "badtouch");
+		JukeBox.setVolume("level1", volume);
+		JukeBox.setVolume("item", volume);
+		JukeBox.setVolume("killennemi", volume);
+		JukeBox.setVolume("badtouch", volume);
+		settings = new Settings(this);
+		
         this.goToMenu();
     }
     
