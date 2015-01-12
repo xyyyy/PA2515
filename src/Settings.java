@@ -38,7 +38,7 @@ public class Settings extends javax.swing.JPanel {
     
     private String item = "book.png";
     
-    private int time = 90;//set Time in seconds
+    private int time = 900;//set Time in seconds
     public Settings(Menu start) {
         initComponents();
         groupButtons();
