@@ -26,13 +26,11 @@ public class Menu extends javax.swing.JFrame {
 	public static final int WIDTH = 700;
 	public static final int HEIGHT = 500;
     
-    private final MainMenu menu = new MainMenu(this);
+   // private final MainMenu menu = new MainMenu(this);
 
-    public MainMenu getMenu() {
-        return menu;
-    }
+    
     private final Settings settings;
-    private final Saver saver = new Saver(this);
+ 
     private  GamePanel game = null;
 
     public GamePanel getGame() {
@@ -73,15 +71,9 @@ public class Menu extends javax.swing.JFrame {
         return true;
     } 
     
-    public void saveGame(){
-        this.saver.saveGame();
-    }
+   
     
-    public void endGame(){
-        this.menu.changeStatus("Game ended(temp)");
-        game = null;
-      
-    }
+ 
     
     
     
@@ -118,10 +110,7 @@ public class Menu extends javax.swing.JFrame {
     
     
     
-    public void goToSavedGames(){
-        this.changePanel(saver);
-    }
-    
+  
     private void changePanel(JPanel panel){
         this.setContentPane(panel);
         this.invalidate();
@@ -187,7 +176,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
