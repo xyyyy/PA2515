@@ -12,13 +12,15 @@ public class Score {
 	private int itemsCollected = 0;
 	private BufferedImage item;
 	private Settings settings;
+	private GamePanel gamePanel;
 	
 	public int getEnemiesKilled(){
 		return this.enemiesKilled;
 		
 	}
-	public Score(Settings settings){
+	public Score(GamePanel gp, Settings settings){
 		this.settings = settings;
+		this.gamePanel = gp;
 		try {
 			item = ImageIO.read(new File("graphics/items/" + this.settings.getItem()));
 		} catch (IOException e) {
@@ -54,7 +56,7 @@ public class Score {
 		g.setColor(Color.GREEN);
 		String tmp = "Enemies killed: " + this.enemiesKilled;
 		g.drawString(tmp, 5, 40);
-		tmp = ": " + this.itemsCollected;
+		tmp = "  remaining: " + this.gamePanel.getAmountOfItemLeft();
 		g.drawString(tmp, 20, 80);
 	}
 	

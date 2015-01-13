@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -51,7 +52,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setFocusable(true);
 		requestFocus();
-		
+		menu.setState(Frame.ICONIFIED);
+		menu.setState(Frame.NORMAL);
 		this.startTime  = new Date().getTime()/1000;
 		this.remainingTime = this.settings.getTime();
 		//Thread t = new Thread(new Time(this.settings, this.menu, this.thread));
@@ -104,6 +106,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
 	}
 	
+	public int getAmountOfItemLeft(){
+		return this.items.size();
+	}
+	
 	private void init() {
 		
 		running = true;
@@ -128,7 +134,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
 		lifes = new Lifes();
 		
-		score = new Score(this.settings);
+		score = new Score(this, this.settings);
 		
 		ennemis = this.settings.getEnemies();
 		items = this.settings.getItems();
@@ -195,7 +201,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 							this.menu.goToMenu("You were hit 3 times");
 						}
 						JukeBox.play("hit");
-						System.out.println("killed");
+					
 						break;
 					}
 					else if(en.getPosition()  == 2){
@@ -258,8 +264,15 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			it.draw(g);
 		}
 		g.setColor(Color.GREEN);
-		
-		String tmp = String.valueOf(this.remainingTime/60) + ":" + String.valueOf(this.remainingTime%60);
+		String tmp ="";
+		if(this.remainingTime/60 <10){
+			tmp += "0";
+		}
+		tmp += String.valueOf(this.remainingTime/60) + ":";
+		if(this.remainingTime%60 < 10){
+			tmp += "0";
+		}
+		tmp += String.valueOf(this.remainingTime%60);
 		g.drawString(tmp, 100, 20);
 		
 	}
