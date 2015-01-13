@@ -106,10 +106,17 @@ public class Menu extends javax.swing.JFrame {
     public void goToMenu(){
         this.goToSettings();
         }
+    public void goToMenu(String m){
+    	this.settings.setMessage(m);
+        this.goToSettings();
+        }
+
 
     public void goToSettings(){
         this.changePanel(settings);
     }
+    
+    
     
     public void goToSavedGames(){
         this.changePanel(saver);

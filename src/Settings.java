@@ -23,8 +23,10 @@ import java.util.ArrayList;
 
 
 
+
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
+import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 
 /**
@@ -72,9 +74,13 @@ public class Settings extends javax.swing.JPanel {
         this.characterImages = new ArrayList<BufferedImage>();
         this.setSize(WIDTH, HEIGHT + 300);
         this.loadPictures();
+       
+        this.result.enable();
         repaint();
     }
-    
+    public void setMessage(String m){
+    	this.result.setText(m);
+    }
     private void loadPictures(){
     	 
 
@@ -405,6 +411,7 @@ public class Settings extends javax.swing.JPanel {
         easy = new javax.swing.JRadioButton();
         medium = new javax.swing.JRadioButton();
         hard = new javax.swing.JRadioButton();
+        result = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(700, 500));
 
@@ -466,6 +473,8 @@ public class Settings extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Volume");
 
+        result.setForeground(new java.awt.Color(255, 255, 255));
+        
         boy.setForeground(new java.awt.Color(255, 255, 255));
         boy.setText("Boy");
         boy.addActionListener(new java.awt.event.ActionListener() {
@@ -485,10 +494,10 @@ public class Settings extends javax.swing.JPanel {
         jButton1.setText("Play");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	jButton1ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        
+
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Gender");
 
@@ -534,18 +543,21 @@ public class Settings extends javax.swing.JPanel {
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(nerd)
-                                .addGap(22, 22, 22)
-                                .addComponent(partyAnimal))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(medium)
                                     .addComponent(girl))
                                 .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(boy)
-                                    .addComponent(hard))))
-                        .addGap(40, 449, Short.MAX_VALUE))
+                                    .addComponent(hard))
+                                .addGap(40, 485, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(nerd)
+                                .addGap(22, 22, 22)
+                                .addComponent(partyAnimal)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(result)
+                                .addGap(76, 76, 76))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(map1)
@@ -575,7 +587,8 @@ public class Settings extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(nerd)
-                    .addComponent(partyAnimal))
+                    .addComponent(partyAnimal)
+                    .addComponent(result))
                 .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -777,6 +790,8 @@ public class Settings extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel result;
     private javax.swing.JRadioButton map1;
     private javax.swing.JRadioButton map2;
     private javax.swing.JRadioButton map3;
