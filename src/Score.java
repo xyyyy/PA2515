@@ -13,7 +13,10 @@ public class Score {
 	private BufferedImage item;
 	private Settings settings;
 	
-	
+	public int getEnemiesKilled(){
+		return this.enemiesKilled;
+		
+	}
 	public Score(Settings settings){
 		this.settings = settings;
 		try {

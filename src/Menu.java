@@ -55,10 +55,12 @@ public class Menu extends javax.swing.JFrame {
 		JukeBox.load("getitem.wav", "item");
 		JukeBox.load("killennemi.wav", "killennemi");
 		JukeBox.load("badtouch.wav", "badtouch");
+		JukeBox.load("hit.wav", "hit");
 		JukeBox.setVolume("level1", volume);
 		JukeBox.setVolume("item", volume);
 		JukeBox.setVolume("killennemi", volume);
 		JukeBox.setVolume("badtouch", volume);
+		JukeBox.setVolume("hit", 0);
 		settings = new Settings(this);
 		
         this.goToMenu();

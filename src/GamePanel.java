@@ -82,7 +82,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			this.remainingTime = this.settings.getTime()+ this.startTime - new Date().getTime()/1000;
 		
 			if(this.remainingTime<=0){
-				menu.goToMenu();
+				menu.goToMenu("You run out of time!");
 			
 			}
 			startTime = System.nanoTime();
@@ -192,9 +192,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 					if (en.getPosition() == 1 || en.getPosition() == 3){
 						this.ennemis.remove(en);
 						if(this.lifes.kill()){
-							this.menu.goToMenu();
+							this.menu.goToMenu("You were hit 3 times");
 						}
-						//JukeBox.play("badtouch");-> here should be played the killed sound
+						JukeBox.play("hit");
 						System.out.println("killed");
 						break;
 					}
@@ -230,6 +230,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 					items.remove(it);
 					break;
 			}
+		}
+		if(items.size() == 0){
+			this.menu.goToMenu("You won and killed " + this.score.getEnemiesKilled()+ " enemies");
 		}
 			
 		
