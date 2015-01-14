@@ -44,7 +44,7 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
        
         initComponents();
-       URL url =  ClassLoader.getSystemResource("graphics/icon.jpg");
+        URL url =  ClassLoader.getSystemResource("graphics/icon.jpg");
         Toolkit kit = Toolkit.getDefaultToolkit();
         Image img = kit.createImage(url);
         setIconImage(img);
