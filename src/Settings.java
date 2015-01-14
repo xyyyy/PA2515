@@ -58,7 +58,7 @@ public class Settings extends javax.swing.JPanel {
     private BufferedImage backgroundImage;
     private BufferedImage logoImage;
     private ArrayList<BufferedImage> characterImages;
-    
+    private ArrayList<BufferedImage> headImages;
 
     
     public Settings(Menu start) {
@@ -72,6 +72,7 @@ public class Settings extends javax.swing.JPanel {
         this.easy.doClick();
         this.mapChanged();
         this.characterImages = new ArrayList<BufferedImage>();
+        this.headImages = new ArrayList<BufferedImage>();
         this.setSize(WIDTH, HEIGHT + 300);
         this.loadPictures();
        
@@ -90,6 +91,9 @@ public class Settings extends javax.swing.JPanel {
             this.logoImage = ImageIO.read(new File("graphics/logo.png"));//graphics/logo.png"));
             for(int i = 1; i < 5; i++){
             	this.characterImages.add(ImageIO.read(new File("graphics/characters/ch0"+  i+".png")));
+            }
+            for(int i = 1; i < 5; i++){
+            	this.headImages.add(ImageIO.read(new File("graphics/characters/ch0"+  i+"-headicon.png")));
             }
          } catch (IOException ex) {
          }
@@ -777,6 +781,10 @@ public class Settings extends javax.swing.JPanel {
         g.drawImage(this.backgroundImage, 0, 0,WIDTH, HEIGHT, null); // see javadoc for more info on the parameters
         g.drawImage(this.logoImage, WIDTH/2 - 577/6, 30,577/3, 132/3, null);
         g.drawImage(this.characterImages.get(this.characterSkin - 1), WIDTH/2 - 70, 110, 130, HEIGHT - 150, null);
+        g.drawImage(this.headImages.get(0), 130, 10, 20, 18, null);
+        g.drawImage(this.headImages.get(1), 100, 10, 20, 17, null);
+        g.drawImage(this.headImages.get(2), 220, 10, 20, 17, null);
+        g.drawImage(this.headImages.get(3), 190, 5, 20, 26, null);
     }
     
     private ButtonGroup bgDifficulty;
