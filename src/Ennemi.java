@@ -59,16 +59,16 @@ public class Ennemi {
 			idleSprites = new BufferedImage[1];
 			jumpingSprites = new BufferedImage[1];
 			fallingSprites = new BufferedImage[1];
-			walkingSprites = new BufferedImage[6];
+			walkingSprites = new BufferedImage[5];
 			
-			idleSprites[0] = ImageIO.read(new File("graphics/player/kirbyidle.gif"));
-			jumpingSprites[0] = ImageIO.read(new File("graphics/player/kirbyjump.gif"));
-			fallingSprites[0] = ImageIO.read(new File("graphics/player/kirbyfall.gif"));
+			idleSprites[0] = ImageIO.read(new File("graphics/player/kirbyidle.png"));
+			jumpingSprites[0] = ImageIO.read(new File("graphics/player/kirbyjump.png"));
+			fallingSprites[0] = ImageIO.read(new File("graphics/player/kirbyfall.png"));
 			
-			BufferedImage image = ImageIO.read(new File("graphics/player/kirbywalk.gif"));
+			BufferedImage image = ImageIO.read(new File("graphics/player/kirbywalk.png"));
 			for(int i = 0; i < walkingSprites.length; i++) {
 				walkingSprites[i] = image.getSubimage(
-					i * width + i,
+					i * width,
 					0,
 					width,
 					height
