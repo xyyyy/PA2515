@@ -688,7 +688,7 @@ public class Settings extends javax.swing.JPanel {
 		JukeBox.setVolume("item", volume);
 		JukeBox.setVolume("killennemi", volume);
 		JukeBox.setVolume("badtouch", volume);
-        
+		JukeBox.setVolume("hit", volume);
         
         
     }                                         

@@ -60,7 +60,7 @@ public class Menu extends javax.swing.JFrame {
 		JukeBox.setVolume("item", volume);
 		JukeBox.setVolume("killennemi", volume);
 		JukeBox.setVolume("badtouch", volume);
-		JukeBox.setVolume("hit", 0);
+		JukeBox.setVolume("hit", volume);
 		settings = new Settings(this);
 		
         this.goToMenu();
